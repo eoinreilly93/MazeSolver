@@ -137,9 +137,9 @@ public class MazeSolver {
 	    else {
 	    	maze[i][j] = 'X';
 	    }
-	    	    
-	    //North
-	    if ((solve(i - 1 , j)) == true) {
+	    	
+	    //South
+	    if ((solve(i + 1, j)) == true) {
 	        return true;
 	    }
 	    //West
@@ -150,10 +150,13 @@ public class MazeSolver {
 	    if ((solve(i , j + 1)) == true) {
 	        return true;
 	    }
-	    //South
-	    if ((solve(i + 1, j)) == true) {
+	    //North
+	    if ((solve(i - 1 , j)) == true) {
 	        return true;
 	    }
+	    
+	    
+	    
 	    
 	    maze[i][j] = ' ';
 	    return false;
