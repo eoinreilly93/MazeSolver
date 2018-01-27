@@ -1,7 +1,11 @@
 # MazeSolver
 Simple Java program to solve a maze using recursion
 
-This program accepts one argument, a text file in the following format. It can be run via the tests provided here, or compiled into an executable jar and executed via the command "java -jar <jarname> inputFile.txt"
+This program accepts one argument, a text file in the following format. 
+To run it, you can:
+	1) Open the project in an IDE and run the tests provided
+	2) Execute the jar file provided with the following command "java -jar MazeSolver.jar src/main/resources/medium_input.txt"
+		- Replace medium_input.txt with any of the given text files
 
 Input file format
 ================
