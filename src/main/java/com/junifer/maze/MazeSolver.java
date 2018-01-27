@@ -128,7 +128,7 @@ public class MazeSolver {
 	 * @param j		- y coordinate
 	 * @return		- true when maze is solved
 	 */
-	private boolean solve(int i, int j) {
+	private boolean solve(int i, int j) { 
 		
 		if (maze[i][j] == '#') {
 			return false;
@@ -142,7 +142,7 @@ public class MazeSolver {
 	        return false;
 	    }
 	    
-	   maze[i][j] = 'X';
+	    maze[i][j] = 'X';
 	    	
 	    //South
 	    if ((solve(i + 1, j)) == true) {
