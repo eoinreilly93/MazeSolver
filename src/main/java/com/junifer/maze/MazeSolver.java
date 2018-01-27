@@ -24,8 +24,12 @@ public class MazeSolver {
 		String fileName = args[0];
 		ms.buildMaze(fileName);
 		ms.formatMaze();
-		ms.solve(startX, startY);
-		ms.printMaze();		
+		if(ms.solve(startX, startY)) {
+			ms.printMaze();
+		}
+		else {
+			System.out.println("The maze could not be solved");
+		}				
 	}	
 	
 	
@@ -52,7 +56,7 @@ public class MazeSolver {
                 case (1):
                     width = Integer.parseInt(line.substring(0, line.indexOf(' ')));
                 	height = Integer.parseInt((line.substring(line.indexOf(' ')+1)));
-                    maze = new char [height][width];
+                    maze = new char[height][width];
                     break;
                 case (2):
                     temp = line.charAt(0);
@@ -97,11 +101,13 @@ public class MazeSolver {
 	 * Also sets start and end values 'S' and 'E'
 	 */
 	private void formatMaze() {
+		
 		maze[startX][startY] = 'S';
 		maze[endX][endY] = 'E';	
 		
 		for (int i = 0; i < height; i++) {
 			for(int j = 0; j < width; j++) {
+				
 				if(maze[i][j] == '1') {
 					maze[i][j] = '#';
 		        }
@@ -164,6 +170,7 @@ public class MazeSolver {
 	 * Prints the solved maze path
 	 */
 	private void printMaze() {
+		
 		maze[startX][startY] = 'S';
 		for (int i = 0; i < maze.length; i++) {
 	        System.out.println(maze[i]);
