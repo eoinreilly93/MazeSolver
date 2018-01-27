@@ -62,7 +62,7 @@ public class MazeSolver {
                     break;
                 case (3):
                     endY = Integer.parseInt(line.substring(0, line.indexOf(' ')));
-                    endX = Integer.parseInt((line.substring(line.indexOf(' ')+1)));
+                    endX = Integer.parseInt((line.substring(line.indexOf(' ') +1 )));
                     break;
                 default:
                     int counter = 0;
@@ -124,19 +124,19 @@ public class MazeSolver {
 	 */
 	private boolean solve(int i, int j) {
 		
-		if (maze[i][j] == '#')
+		if (maze[i][j] == '#') {
+			return false;
+		}
+	        
+	    if (maze[i][j] == 'E') {
+	    	return true;
+	    }
+	        
+	    if (maze[i][j] == 'X') {
 	        return false;
-	    if (maze[i][j] == 'E')
-	        return true;
-	    if (maze[i][j] == 'X')    
-	        return false;
+	    }
 	    
-	    if (maze[i][j] == 'S') {
-	    	maze[i][j] = 'S';
-	    }
-	    else {
-	    	maze[i][j] = 'X';
-	    }
+	   maze[i][j] = 'X';
 	    	
 	    //South
 	    if ((solve(i + 1, j)) == true) {
@@ -153,10 +153,7 @@ public class MazeSolver {
 	    //North
 	    if ((solve(i - 1 , j)) == true) {
 	        return true;
-	    }
-	    
-	    
-	    
+	    }	    
 	    
 	    maze[i][j] = ' ';
 	    return false;
@@ -166,7 +163,8 @@ public class MazeSolver {
 	/**
 	 * Prints the solved maze path
 	 */
-	private void printMaze() {		
+	private void printMaze() {
+		maze[startX][startY] = 'S';
 		for (int i = 0; i < maze.length; i++) {
 	        System.out.println(maze[i]);
 	    }
