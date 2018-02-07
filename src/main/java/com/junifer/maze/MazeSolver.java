@@ -65,14 +65,14 @@ public class MazeSolver {
             endY = readLineValue(finish, 1);
             
             //Populate maze
-            int rowCounter = -1;
+            int rowNum = -1;
             String line;
             while((line = br.readLine()) != null) {
             	int columnNum = 0;
-            	rowCounter++;
+            	rowNum++;
             	for (int i = 0; i < line.length(); i++){
             		if(line.charAt(i) != ' '){
-            			maze[rowCounter][columnNum] = line.charAt(i);
+            			maze[rowNum][columnNum] = line.charAt(i);
             			columnNum++;
             		}
             	}
@@ -99,7 +99,7 @@ public class MazeSolver {
 	private void formatMaze() {
 		
 		maze[startY][startX] = 'S';
-		maze[endY][endX] = 'E';	
+		maze[endY][endX] = 'E';
 		
 		for (int i = 0; i < height; i++) {
 			for(int j = 0; j < width; j++) {
@@ -161,6 +161,12 @@ public class MazeSolver {
 	    return false;
 	}
 	
+	/**
+	 * Returns the coordinate point for the input file line
+	 * @param line		- Line from the input file
+	 * @param index		- Index of array to return (Will always be 0 or 1)
+	 * @return
+	 */
 	private int readLineValue(String line, int index) {
 		String[] temp = line.split(" ");
 		return Integer.parseInt(temp[index]);
