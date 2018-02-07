@@ -39,10 +39,6 @@ public class MazeSolver {
 	 */
 	private void buildMaze(String file) {
 	
-        char temp;
-        String line = null;
-        int count = 1;
-        int heightCounter = 0;
         try {
         	f = new File(file);
     		if(!f.exists() || f.isDirectory()) {
@@ -51,36 +47,39 @@ public class MazeSolver {
     		
     		//Read each file line to populate necessary variables and maze coordinates
             br = new BufferedReader(new FileReader(file));
+            
+            //Get width and height of maze
+            String dimensions = br.readLine();
+            width = Integer.parseInt(dimensions.substring(0, dimensions.indexOf(' ')));
+            height = Integer.parseInt((dimensions.substring(dimensions.indexOf(' ') +1 )));
+            maze = new char[height][width];
+              
+            //Get start point
+            String start = br.readLine();
+            char temp;
+            temp = start.charAt(0);
+            startY = Character.getNumericValue(temp);
+            temp = start.charAt(2);
+            startX = Character.getNumericValue(temp);
+            
+            //Get finish point
+            String finish = br.readLine();
+            endY = Integer.parseInt(finish.substring(0, finish.indexOf(' ')));
+            endX = Integer.parseInt((finish.substring(finish.indexOf(' ') +1 )));
+            
+            //Populate maze
+            int heightCounter = -1;
+            String line;
             while((line = br.readLine()) != null) {
-                switch (count) {
-                case (1):
-                    width = Integer.parseInt(line.substring(0, line.indexOf(' ')));
-                	height = Integer.parseInt((line.substring(line.indexOf(' ')+1)));
-                    maze = new char[height][width];
-                    break;
-                case (2):
-                    temp = line.charAt(0);
-                    startY = Character.getNumericValue(temp);
-                    temp = line.charAt(2);
-                    startX = Character.getNumericValue(temp);
-                    break;
-                case (3):
-                    endY = Integer.parseInt(line.substring(0, line.indexOf(' ')));
-                    endX = Integer.parseInt((line.substring(line.indexOf(' ') +1 )));
-                    break;
-                default:
-                    int counter = 0;
-                    for (int i = 0; i < line.length(); i++){
-                        if(line.charAt(i) != ' '){
-                            maze[heightCounter][counter] = line.charAt(i);
-                            counter++;
-                        }
-                    }
-                    heightCounter++;
-                    break;
-                }
-                count++;
-            }
+            	int lineNum = 0;
+            	heightCounter++;
+            	for (int i = 0; i < line.length(); i++){
+            		if(line.charAt(i) != ' '){
+            			maze[heightCounter][lineNum] = line.charAt(i);
+                		lineNum++;
+            		}
+            	}
+            }                         
         }
         catch(FileNotFoundException fnfe) {
         	System.out.println("The file : " + f.getName() + " does not exist" );
