@@ -29,7 +29,7 @@ public class MazeSolver {
 		}
 		else {
 			System.out.println("The maze could not be solved");
-		}				
+		}
 	}	
 	
 	
@@ -50,33 +50,30 @@ public class MazeSolver {
             
             //Get width and height of maze
             String dimensions = br.readLine();
-            width = Integer.parseInt(dimensions.substring(0, dimensions.indexOf(' ')));
-            height = Integer.parseInt((dimensions.substring(dimensions.indexOf(' ') +1 )));
+            width = readLineValue(dimensions, 0);
+            height = readLineValue(dimensions, 1);
             maze = new char[height][width];
               
             //Get start point
             String start = br.readLine();
-            char temp;
-            temp = start.charAt(0);
-            startY = Character.getNumericValue(temp);
-            temp = start.charAt(2);
-            startX = Character.getNumericValue(temp);
+            startX = readLineValue(start, 0);
+            startY = readLineValue(start, 1);
             
             //Get finish point
             String finish = br.readLine();
-            endY = Integer.parseInt(finish.substring(0, finish.indexOf(' ')));
-            endX = Integer.parseInt((finish.substring(finish.indexOf(' ') +1 )));
+            endX = readLineValue(finish, 0);
+            endY = readLineValue(finish, 1);
             
             //Populate maze
-            int heightCounter = -1;
+            int rowCounter = -1;
             String line;
             while((line = br.readLine()) != null) {
-            	int lineNum = 0;
-            	heightCounter++;
+            	int columnNum = 0;
+            	rowCounter++;
             	for (int i = 0; i < line.length(); i++){
             		if(line.charAt(i) != ' '){
-            			maze[heightCounter][lineNum] = line.charAt(i);
-                		lineNum++;
+            			maze[rowCounter][columnNum] = line.charAt(i);
+            			columnNum++;
             		}
             	}
             }                         
@@ -101,8 +98,8 @@ public class MazeSolver {
 	 */
 	private void formatMaze() {
 		
-		maze[startX][startY] = 'S';
-		maze[endX][endY] = 'E';	
+		maze[startY][startX] = 'S';
+		maze[endY][endX] = 'E';	
 		
 		for (int i = 0; i < height; i++) {
 			for(int j = 0; j < width; j++) {
@@ -162,6 +159,11 @@ public class MazeSolver {
 	    
 	    maze[i][j] = ' ';
 	    return false;
+	}
+	
+	private int readLineValue(String line, int index) {
+		String[] temp = line.split(" ");
+		return Integer.parseInt(temp[index]);
 	}
 	
 	
