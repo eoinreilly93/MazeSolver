@@ -24,7 +24,7 @@ public class MazeSolver {
 		String fileName = args[0];
 		ms.buildMaze(fileName);
 		ms.formatMaze();
-		if(ms.solve(startX, startY)) {
+		if(ms.solve(startY, startX)) {
 			ms.printMaze();
 		}
 		else {
@@ -120,8 +120,8 @@ public class MazeSolver {
 	 * Finds the path to the exit by marking each visited point and
 	 * recursively calling the method with new coordinates until the exit
 	 * is reached
-	 * @param i     - x coordinate
-	 * @param j		- y coordinate
+	 * @param i     - y coordinate
+	 * @param j		- x coordinate
 	 * @return		- true when maze is solved
 	 */
 	private boolean solve(int i, int j) { 
@@ -177,8 +177,7 @@ public class MazeSolver {
 	 * Prints the solved maze path
 	 */
 	private void printMaze() {
-		
-		maze[startX][startY] = 'S';
+		maze[startY][startX] = 'S';
 		for (int i = 0; i < maze.length; i++) {
 	        System.out.println(maze[i]);
 	    }
